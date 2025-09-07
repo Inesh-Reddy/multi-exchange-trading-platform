@@ -87,7 +87,6 @@ export const createDatabaseConnection = async (
 // Environment-based configuration factory
 export const getDatabaseConfig = (): DatabaseConfig => {
   return {
-    type: "postgres",
     host: process.env.DATABASE_HOST || "localhost",
     port: parseInt(process.env.DATABASE_PORT || "5432"),
     username: process.env.DATABASE_USERNAME || "trader",
