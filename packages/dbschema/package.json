@@ -1,0 +1,35 @@
+{
+  "name": "@repo/dbschema",
+  "version": "1.0.0",
+  "description": "Shared database schema and entities for trading platform",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migration:generate": "npm run typeorm -- migration:generate ./src/migrations/Migration -d ./ormconfig.ts",
+    "migration:create": "npm run typeorm -- migration:create ./src/migrations/Migration",
+    "migration:run": "npm run typeorm -- migration:run -d ./ormconfig.ts",
+    "migration:revert": "npm run typeorm -- migration:revert -d ./ormconfig.ts",
+    "migration:show": "npm run typeorm -- migration:show -d ./ormconfig.ts",
+    "schema:sync": "npm run typeorm -- schema:sync -d ./ormconfig.ts",
+    "schema:drop": "npm run typeorm -- schema:drop -d ./ormconfig.ts"
+  },
+  "dependencies": {
+    "typeorm": "^0.3.17",
+    "pg": "^8.11.3",
+    "class-validator": "^0.14.0",
+    "class-transformer": "^0.5.1",
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.10.7",
+    "typescript": "^5.7.3"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^10.0.0",
+    "@nestjs/typeorm": "^10.0.0",
+    "@nestjs/config": "4.0.2"
+  }
+}
