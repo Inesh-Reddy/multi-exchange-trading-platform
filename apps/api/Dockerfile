@@ -10,22 +10,22 @@ WORKDIR /app
 RUN corepack enable pnpm
 RUN npm install -g turbo@latest @nestjs/cli
 
-# Copy all root config files
+# Copy root package files first (for better caching)
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml turbo.json ./
 COPY *.config.* ./
 
-# Copy all apps and packages
+# Copy all apps and packages (needed for monorepo)
 COPY apps ./apps
 COPY packages ./packages
 
 # Install all dependencies
 RUN pnpm install
 
-# Stay in root directory
+# Stay in root directory (for turbo commands)
 WORKDIR /app
 
-# Expose port
+# Expose API port
 EXPOSE 3000
 
-# Run dev from root
-CMD ["pnpm", "run", "dev"]
+# Run only the API
+CMD ["pnpm", "run", "dev", "--filter=api"]
